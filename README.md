@@ -6,6 +6,17 @@
 Friday, 8 December 2023, at 5:00 PM.
 
 ---
+
+## ❖・Grading・❖
+
+| Item                     | Points |
+|--------------------------|:------:|
+| *Project implementation* | `33`   |
+| *Syntax quality*         | `33`   |
+| *Following instructions* | `33`   |
+
+---
+
 ## ❖・Submission・❖
 
 **NO late submissions will be accepted.**
