@@ -27,6 +27,8 @@ The database should handle the following operations, all via HTML forms:
 * **Insert** new entries into the database. Each new entry should accept site/app name, URL, email address, username, password, and a comment. The comment field in the HTML form should use the HTML [`textarea`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea) element in lieu of the `input` element.
 * **Delete** an entry from the database based on a pattern match with another distinct column/attribute.
 
+Include a button, prominently placed, that adds the ability to refresh the page, in effect, clearing the results.
+
 You’ll also need to draw a diagram of your entity-relationship, or ER, model. You may do this on paper and then take a picture, or you may use any digital tool you like.
 
 ---
