@@ -17,6 +17,17 @@ In assignment 2, you created a database consisting of flat tables, or relations,
 In essence, you’re creating an elaborate, MVC-based application of assignment 2 using a WAMP/MAMP stack.
 
 ---
+
+## ❖・Requirements・❖
+
+The database should handle the following operations, all via HTML forms:
+
+* **Search** every entry in the database, wrapping the result in a table. If the search fails, indicate this to the user.
+* **Update** any column/attribute using another distinct column/attribute as a pattern match.
+* **Insert** new entries into the database. Each new entry should accept site/app name, URL, email address, username, password, and a comment. The comment field in the HTML form should use the HTML [`textarea`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea) element in lieu of the `input` element.
+* **Delete** an entry from the database based on a pattern match with another distinct column/attribute.
+
+---
 ## ❖・Due・❖
 
 Friday, 8 December 2023, at 5:00 PM.
