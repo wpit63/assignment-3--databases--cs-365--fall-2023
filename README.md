@@ -30,6 +30,22 @@ The database should handle the following operations, all via HTML forms:
 You’ll also need to draw a diagram of your entity-relationship, or ER, model. You may do this on paper and then take a picture, or you may use any digital tool you like.
 
 ---
+
+## ❖・Rules・❖
+
+* Paths used in any of the HTML or PHP files must be relative; no absolute paths.
+* The database name must be `student_passwords`.
+* The database username must be `passwords_user`. The password you create does not matter, but must be included in `mysql/setup.sql`.
+* The commands to create the database and the user should be included in `mysql/setup.sql`. Standing up the database must be done via the command `source setup.sql`.
+* You must ensure that the name of your ER model image is one of either `er-model.jpg`, `er-model.png`, or, `er-model.pdf`. No other file name or type is allowed. Also note that the file may not be larger than 1MB. Use an image editor, such as [GIMP](https://www.gimp.org/), if you need to further reduce the file size of your image.
+* Your ER model image must be placed in the included `entity-relationship-model` folder.
+* `php/config.php` should contain the database credentials required for the user to log in. These credentials should also be included in `mysql/setup.sql`.
+* `php/helpers.php` should contain functions requiring interactions with the database. In previous examples, this file has been called `db.php`.
+* Do not edit any of the `.gitignore` files.
+* Do not add more files to this repo; all files required for this project are already included. If you must add one or more files, because you found an error in this assignment’s scaffold, first ask on our class’ Microsoft Group so everyone is aware of the mistake.
+* You must use EditorConfig, per the included `.editorconfig` file.
+
+---
 ## ❖・Due・❖
 
 Friday, 8 December 2023, at 5:00 PM.
