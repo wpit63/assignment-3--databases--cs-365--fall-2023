@@ -46,6 +46,15 @@ You’ll also need to draw a diagram of your entity-relationship, or ER, model. 
 * You must use EditorConfig, per the included `.editorconfig` file.
 
 ---
+
+## ❖・Tips・❖
+
+* Clone this repo into your `htdocs` folder, if you’re a Windows user, or the `Sites` folder, if you’re a macOS user. Don’t rely entirely on PhpStorm’s `localhost` for the development of this project.
+* Note that Windows is usually configured by default to hide extensions, so you’ll need to be careful about a file that has the same extension twice, which would be ignored by this repo. For example, you might think you named your ER model file `er-model.png`, when, in fact, it might actually have been called `er-model.png.png`.
+* You may reuse any and all of the CSS from our examples repo, or any other CSS you like.
+
+---
+
 ## ❖・Due・❖
 
 Friday, 8 December 2023, at 5:00 PM.
