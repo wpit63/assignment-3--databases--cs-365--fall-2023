@@ -1,0 +1,231 @@
+<?php
+require "includes/helpers.php"
+
+?>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Working with a Passwords Database</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:ital,wght@100;200;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Working with a Passwords Database</h1>
+  </header>
+  <main>
+    <section>
+    <form method="post">
+        <input type="submit" name="reset" id="reset" value="RESET" /><br/>
+    </form>
+    <?php
+        function cleanDB() {
+            include_once "includes/config.php";
+
+            $db = new PDO("mysql:host=".DBHOST."; dbname=".DBNAME,
+            DBUSER,
+            DBPASS);
+
+            $sql = file_get_contents('mysql/setup.sql');
+
+            $qr = $db->exec($sql);
+
+            $sql= file_get_contents('mysql/setup.sql');
+            mysqli_multi_query($sql);
+        }
+
+        if(array_key_exists('reset',$_POST)) {
+            cleanDB();
+            // echo $_SERVER['PHP_SELF'];
+        }
+    ?>
+
+    </section>
+    <section>
+      <h2>Check if a Value Exists in a Table's Attribute</h2>
+      <p><code>function valueExistsInAttribute($value, $attribute, $table)</code></p>
+      <hr>
+      <form action="/assignment-3--databases--cs-365--fall-2023/index.php" method="POST">
+        <label for="value1">Value:</label><br>
+        <input type="text" id="value1" name="value1"><br>
+        <label for="attribute1">Attribute:</label><br>
+        <input type="text" id="attribute1" name="attribute1"><br>
+        <lable for="table1">Table:</label><br>
+        <input type="text" id="table1" name="table1"><br>
+        <input type="submit" name='submit1' value="Submit1">
+      </form>
+      <p><strong class="database-query">Query</strong>: Is <i>Dysnomia</i> in my record collection?</p>
+      <p><strong class="database-result">Result</strong>:
+        <?php
+            if(isset($_POST['submit1'])){
+                if(valueExistsInAttribute($_POST["value1"],  $_POST["attribute1"],  $_POST["table1"])) {
+                    echo "True";
+                } else {
+                    echo "False";
+                }
+            }
+        ?>
+      </p>
+    </section>
+    <section>
+      <h2>Retrieve all Attribute Values in a Table</h2>
+      <p><code>function getAttributeFromTable($attribute, $table)</code></p>
+      <hr>
+      <form action="/assignment-3--databases--cs-365--fall-2023/index.php" method="POST">
+        <label for="attribute2">Attribute:</label><br>
+        <input type="text" id="attribute2" name="attribute2"><br>
+        <lable for="table2">Table:</label><br>
+        <input type="text" id="table2" name="table2"><br>
+        <input type="submit" name='submit2' value="Submit2">
+      </form>
+      <p><strong class="database-query">Query</strong>: Show me all the albums in my record collection?</p>
+      <p><strong class="database-result">Result</strong>:</p>
+      <ul>
+        <?php
+            if(isset($_POST['submit2'])){
+                printAttributesFromTable($_POST["attribute2"], $_POST["table2"]);
+            }
+        ?>
+      </ul>
+    </section>
+<!--
+    <section>
+      <h2>Retrieve the First Value From a Relation Should a Query Match a Pattern</h2>
+      <p><code>function getValue($value, $table, $query, $pattern)</code></p>
+      <hr>
+      <form action="/assignment-3--databases--cs-365--fall-2023/index.php" method="POST">
+        <label for="value2">Attribute:</label><br>
+        <input type="text" id="value2" name="value2"><br>
+        <lable for="table2">Table:</label><br>
+        <input type="text" id="table2" name="table2"><br>
+        <lable for="query1">Query:</label><br>
+        <input type="text" id="query1" name="query1"><br>
+        <lable for="pattern1">Pattern</label><br>
+        <input type="text" id="pattern1" name="pattern1"><br>
+        <input type="submit" name='submit3' value="Submit3">
+      </form>
+      <p><strong class="database-query">Query</strong>: I have so many albums. Do I own The Melvins’ <i>Houdini</i>?</p>
+      <p><strong class="database-result">Result</strong>:
+        <#?php
+            $albumName = getValue("album_name", "album", "artist_id", MELVINS);
+
+            if(strcmp($albumName, "Houdini") == 0) {
+                echo "Indeed, <i>{$albumName}</i> is in my collection";
+            } else {
+                echo "<i>{$albumName}</i> is not in your collection. Get it, now!";
+            }
+        ?>
+      </p>
+    </section>
+-->
+    <section>
+      <h2>Update an Attribute</h2>
+      <p><code>function updateAttribute($table, $current_attribute, $new_attribute, $query_attribute, $pattern)</code></p>
+      <hr>
+      <form action="/assignment-3--databases--cs-365--fall-2023/index.php" method="POST">
+        <lable for="table4">Table:</label><br>
+        <input type="text" id="table4" name="table4"><br>
+        <label for="attribute3">Current Attribute:</label><br>
+        <input type="text" id="attribute3" name="attribute3"><br>
+        <label for="attribute4">New Attribute:</label><br>
+        <input type="text" id="attribute4" name="attribute4"><br>
+        <label for="attribute5">Query Attribute:</label><br>
+        <input type="text" id="attribute5" name="attribute5"><br>
+        <label for="pattern2">Pattern:</label><br>
+        <input type="text" id="pattern2" name="pattern2"><br>
+        <input type="submit" name='submit4' value="Submit4">
+      </form>
+      <p><strong class="database-query">Query</strong>: Warpaint's <i>Heads Up</i> should not be in all caps. Let’s change it to title case.</p>
+      <p><strong class="database-result">Result</strong>:
+        <?php
+            if(isset($_POST['submit4'])){
+                updateAttribute($_POST["table4"], $_POST["attribute3"], $_POST["attribute4"], $_POST["attribute5"], $_POST["pattern2"]);
+            }
+        ?>
+      </p>
+      <ul>
+        <?php
+            if(isset($_POST['submit4'])){
+                getAttributeFromTable($_POST["attribute3"], $_POST["table4"]);
+            }
+        ?>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Delete an Attribute</h2>
+      <p><code>function delete($table, $attribute, $query)</code></p>
+      <hr>
+      <form action="/assignment-3--databases--cs-365--fall-2023/index.php" method="POST">
+        <lable for="table5">Table:</label><br>
+        <input type="text" id="table5" name="table5"><br>
+        <label for="attribute6">Attribute:</label><br>
+        <input type="text" id="attribute6" name="attribute6"><br>
+        <label for="pattern3">Pattern:</label><br>
+        <input type="text" id="pattern3" name="pattern3"><br>
+        <input type="submit" name="submit5" value="Submit5">
+      </form>
+      <p><strong class="database-query">Query</strong>: Warpaint's <i>Heads Up</i> should not be in all caps. Let’s change it to title case.</p>
+      <p><strong class="database-result">Result</strong>:
+        <?php
+            if(isset($_POST["submit5"])){
+                delete($_POST["table5"], $_POST["attribute6"], $_POST["pattern3"]);
+            }
+        ?>
+      </p>
+      <ul>
+        <?php
+            if(isset($_POST['submit5'])){
+                getAttributeFromTable($_POST["attribute6"], $_POST["table5"]);
+            }
+        ?>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Insert a Row</h2>
+      <p><code>function create($table1, $web_domain, $web_name, $table2, $username, $email, $p_word, $comment)</code></p>
+      <hr>
+      <form action="/assignment-3--databases--cs-365--fall-2023/index.php" method="POST">
+        <lable for="table6">Table:</label><br>
+        <input type="text" id="table6" name="table6"><br>
+        <label for="attribute7">Attribute:</label><br>
+        <input type="text" id="attribute7" name="attribute7"><br>
+        <label for="attribute8">Attribute:</label><br>
+        <input type="text" id="attribute8" name="attribute8"><br>
+        <lable for="table7">Table:</label><br>
+        <input type="text" id="table7" name="table7"><br>
+        <label for="attribute9">Attribute:</label><br>
+        <input type="text" id="attribute9" name="attribute9"><br>
+        <label for="attribute10">Attribute:</label><br>
+        <input type="text" id="attribute10" name="attribute10"><br>
+        <label for="attribute11">Attribute:</label><br>
+        <input type="text" id="attribute11" name="attribute11"><br>
+        <label for="attribute12">Attribute:</label><br>
+        <textarea id="attribute12" name="attribute12" rows="5" cols="33"></textarea><br>
+        <input type="submit" name="submit6" value="Submit6">
+      </form>
+      <p><strong class="database-query">Query</strong>: Warpaint's <i>Heads Up</i> should not be in all caps. Let’s change it to title case.</p>
+      <p><strong class="database-result">Result</strong>:
+        <?php
+            if(isset($_POST["submit6"])){
+                create($_POST["table6"], $_POST["attribute7"], $_POST["attribute8"], $_POST["table7"], $_POST["attribute9"], $_POST["attribute10"], $_POST["attribute11"], $_POST["attribute12"]);
+            }
+        ?>
+      </p>
+      <!-- <ul>
+        <#?php
+            if(isset($_POST['submit5'])){
+                getAttributeFromTable($_POST["attribute6"], $_POST["table5"]);
+            }
+        ?>
+      </ul> -->
+    </section>
+
+
+  </main>
+</body>
+</html>
