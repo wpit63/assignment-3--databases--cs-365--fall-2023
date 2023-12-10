@@ -84,7 +84,6 @@ require "includes/helpers.php"
             cleanDB();
         }
     ?>
-
     </section>
     <section>
       <h2>Check if a Value Exists in a Table's Attribute</h2>
@@ -99,8 +98,6 @@ require "includes/helpers.php"
         <input type="text" id="table1" name="table1"><br>
         <input type="submit" name='submit1' value="Submit1">
       </form>
-      <p><strong class="database-query">Query</strong>: Is <i>Dysnomia</i> in my record collection?</p>
-      <p><strong class="database-result">Result</strong>:
         <?php
             if(isset($_POST['submit1'])){
                 if(valueExistsInAttribute($_POST["value1"],  $_POST["attribute1"],  $_POST["table1"])) {
@@ -123,8 +120,6 @@ require "includes/helpers.php"
         <input type="text" id="table2" name="table2"><br>
         <input type="submit" name='submit2' value="Submit2">
       </form>
-      <p><strong class="database-query">Query</strong>: Show me all the albums in my record collection?</p>
-      <p><strong class="database-result">Result</strong>:</p>
       <ul>
         <?php
             if(isset($_POST['submit2'])){
@@ -133,36 +128,6 @@ require "includes/helpers.php"
         ?>
       </ul>
     </section>
-<!--
-    <section>
-      <h2>Retrieve the First Value From a Relation Should a Query Match a Pattern</h2>
-      <p><code>function getValue($value, $table, $query, $pattern)</code></p>
-      <hr>
-      <form action="/assignment-3--databases--cs-365--fall-2023/index.php" method="POST">
-        <label for="value2">Attribute:</label><br>
-        <input type="text" id="value2" name="value2"><br>
-        <lable for="table2">Table:</label><br>
-        <input type="text" id="table2" name="table2"><br>
-        <lable for="query1">Query:</label><br>
-        <input type="text" id="query1" name="query1"><br>
-        <lable for="pattern1">Pattern</label><br>
-        <input type="text" id="pattern1" name="pattern1"><br>
-        <input type="submit" name='submit3' value="Submit3">
-      </form>
-      <p><strong class="database-query">Query</strong>: I have so many albums. Do I own The Melvins’ <i>Houdini</i>?</p>
-      <p><strong class="database-result">Result</strong>:
-        <#?php
-            $albumName = getValue("album_name", "album", "artist_id", MELVINS);
-
-            if(strcmp($albumName, "Houdini") == 0) {
-                echo "Indeed, <i>{$albumName}</i> is in my collection";
-            } else {
-                echo "<i>{$albumName}</i> is not in your collection. Get it, now!";
-            }
-        ?>
-      </p>
-    </section>
--->
     <section>
       <h2>Update an Attribute</h2>
       <p><code>function updateAttribute($table, $current_attribute, $new_attribute, $query_attribute, $pattern)</code></p>
@@ -180,8 +145,6 @@ require "includes/helpers.php"
         <input type="text" id="pattern2" name="pattern2"><br>
         <input type="submit" name='submit4' value="Submit4">
       </form>
-      <p><strong class="database-query">Query</strong>: Warpaint's <i>Heads Up</i> should not be in all caps. Let’s change it to title case.</p>
-      <p><strong class="database-result">Result</strong>:
         <?php
             if(isset($_POST['submit4'])){
                 updateAttribute($_POST["table4"], $_POST["attribute3"], $_POST["attribute4"], $_POST["attribute5"], $_POST["pattern2"]);
@@ -196,7 +159,6 @@ require "includes/helpers.php"
         ?>
       </ul>
     </section>
-
     <section>
       <h2>Delete an Attribute</h2>
       <p><code>function delete($table, $attribute, $query)</code></p>
@@ -210,8 +172,6 @@ require "includes/helpers.php"
         <input type="text" id="pattern3" name="pattern3"><br>
         <input type="submit" name="submit5" value="Submit5">
       </form>
-      <p><strong class="database-query">Query</strong>: Warpaint's <i>Heads Up</i> should not be in all caps. Let's change it to title case.</p>
-      <p><strong class="database-result">Result</strong>:
         <?php
             if(isset($_POST["submit5"])){
                 delete($_POST["table5"], $_POST["attribute6"], $_POST["pattern3"]);
@@ -226,7 +186,6 @@ require "includes/helpers.php"
         ?>
       </ul>
     </section>
-
     <section>
       <h2>Insert a Row</h2>
       <p><code>function create($table1, $web_domain, $web_name, $table2, $username, $email, $p_word, $comment)</code></p>
@@ -250,24 +209,13 @@ require "includes/helpers.php"
         <textarea id="attribute12" name="attribute12" rows="5" cols="33"></textarea><br>
         <input type="submit" name="submit6" value="Submit6">
       </form>
-      <p><strong class="database-query">Query</strong>: Warpaint's <i>Heads Up</i> should not be in all caps. Let's change it to title case.</p>
-      <p><strong class="database-result">Result</strong>:
         <?php
             if(isset($_POST["submit6"])){
                 create($_POST["table6"], $_POST["attribute7"], $_POST["attribute8"], $_POST["table7"], $_POST["attribute9"], $_POST["attribute10"], $_POST["attribute11"], $_POST["attribute12"]);
             }
         ?>
       </p>
-      <!-- <ul>
-        <#?php
-            if(isset($_POST['submit5'])){
-                getAttributeFromTable($_POST["attribute6"], $_POST["table5"]);
-            }
-        ?>
-      </ul> -->
     </section>
-
-
   </main>
 </body>
 </html>
