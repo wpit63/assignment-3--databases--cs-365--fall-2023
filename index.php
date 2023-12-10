@@ -29,17 +29,59 @@ require "includes/helpers.php"
             DBUSER,
             DBPASS);
 
-            $sql = file_get_contents('mysql/setup.sql');
+            $statement = $db -> prepare("DROP TABLE IF EXISTS website");
+            $statement -> execute();
+            $statement = null;
 
-            $qr = $db->exec($sql);
+            $statement = $db -> prepare("DROP TABLE IF EXISTS account");
+            $statement -> execute();
+            $statement = null;
 
-            $sql= file_get_contents('mysql/setup.sql');
-            mysqli_multi_query($sql);
+            $statement = $db -> prepare("CREATE TABLE website (
+                    web_domain  CHAR(255)     NOT NULL,
+                web_name    CHAR(128)     NOT NULL,
+
+                PRIMARY KEY (web_domain)
+              )");
+            $statement -> execute();
+            $statement = null;
+
+            $statement = $db -> prepare("CREATE TABLE account (
+                web_domain  CHAR(255)     NOT NULL,
+                username    CHAR(64)      NOT NULL,
+                email       CHAR(128)     NOT NULL,
+                p_word      CHAR(64)      NOT NULL,
+                comment     TEXT(65535)           ,
+
+                PRIMARY KEY (web_domain, p_word)
+              )");
+            $statement -> execute();
+            $statement = null;
+
+            $statement = $db -> prepare("INSERT INTO website VALUES
+                ('https://www.youtube.com', 'YouTube'),
+                ('https://www.twitter.com', 'Twitter'),
+                ('https://github.com', 'GitHub'),
+                ('https://www.linkedin.com', 'LinkedIn'),
+                ('https://www.microsoft.com', 'Microsoft')
+              ");
+            $statement -> execute();
+            $statement = null;
+
+            $statement = $db -> prepare("INSERT INTO account VALUES
+                ('https://www.youtube.com', 'Billy Channel', 'billy@gmail.com', 'bobrules!', 'My channel'),
+                ('https://www.twitter.com', 'vmays90', 'victormays@gmail.com', 'stay_OUT', 'i mean it'),
+                ('https://github.com', 'empress5', 'empress5@hotmail.com', 'relaire', 'blah blah'),
+                ('https://www.linkedin.com', 'Mari_G', 'mari@outlook.com', 'sunny', 'this is a comment'),
+                ('https://www.microsoft.com', 'starlight_actress', 'kaijou@outlook.com', 'mr_white', 'star')
+              ");
+            $statement -> execute();
+            $statement = null;
+
         }
 
         if(array_key_exists('reset',$_POST)) {
             cleanDB();
-            // echo $_SERVER['PHP_SELF'];
         }
     ?>
 
@@ -168,7 +210,7 @@ require "includes/helpers.php"
         <input type="text" id="pattern3" name="pattern3"><br>
         <input type="submit" name="submit5" value="Submit5">
       </form>
-      <p><strong class="database-query">Query</strong>: Warpaint's <i>Heads Up</i> should not be in all caps. Let’s change it to title case.</p>
+      <p><strong class="database-query">Query</strong>: Warpaint's <i>Heads Up</i> should not be in all caps. Let's change it to title case.</p>
       <p><strong class="database-result">Result</strong>:
         <?php
             if(isset($_POST["submit5"])){
@@ -208,7 +250,7 @@ require "includes/helpers.php"
         <textarea id="attribute12" name="attribute12" rows="5" cols="33"></textarea><br>
         <input type="submit" name="submit6" value="Submit6">
       </form>
-      <p><strong class="database-query">Query</strong>: Warpaint's <i>Heads Up</i> should not be in all caps. Let’s change it to title case.</p>
+      <p><strong class="database-query">Query</strong>: Warpaint's <i>Heads Up</i> should not be in all caps. Let's change it to title case.</p>
       <p><strong class="database-result">Result</strong>:
         <?php
             if(isset($_POST["submit6"])){
