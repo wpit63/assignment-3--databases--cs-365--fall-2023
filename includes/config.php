@@ -4,6 +4,6 @@
 const DBNAME = "student_passwords";
 const DBHOST = "localhost";
 const DBUSER = "passwords_user";
-const DBPASS = "f(D2Whiue9d8yD";
+const DBPASS = "secret";
 const KEYSTR = "";
 const INITVEC = "";
